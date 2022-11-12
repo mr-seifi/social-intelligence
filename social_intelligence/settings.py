@@ -128,3 +128,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Telegram bot token
 BOT_TOKEN = os.getenv('BOT_TOKEN')
+
+# Influxdb Token
+INFLUX_TOKEN = os.getenv('INFLUXDB_TOKEN')
