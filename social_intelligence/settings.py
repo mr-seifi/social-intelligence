@@ -139,4 +139,7 @@ INFLUX_BUCKET_NAME = os.getenv('INFLUX_BUCKET_NAME')
 
 # Feed Tokens
 LUNARCRUSH_TOKEN = os.getenv('LUNARCRUSH_TOKEN')
-LUNARCRUSH_ASSET_SYMBOLS = ['btc', 'eth', 'bnb', 'matic']
+LUNARCRUSH_ASSET_SYMBOLS = ['btc', 'eth', 'bnb', 'matic', 'xrp', 'doge', 'ada', 'dot', 'hex', 'shib', 'sol', 'trx',
+                            'uni', 'ltc', 'avax', 'link', 'atom', 'etc', 'xmr', 'bch', 'algo', 'cro', 'near', 'vet',
+                            'fil', 'flow', 'lunc', 'chz', 'hbar', 'egld', 'icp', 'xtz', 'ape', 'theta', 'sand', 'mana',
+                            'aave', 'mkr', 'kcs', 'axs', 'btt', 'cake', 'ftm', 'grt']
