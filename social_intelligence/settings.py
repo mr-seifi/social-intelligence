@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,11 @@ BOT_TOKEN = os.getenv('BOT_TOKEN')
 
 # Influxdb Token
 INFLUX_TOKEN = os.getenv('INFLUXDB_TOKEN')
+INFLUX_SERVER_HOST = os.getenv('INFLUX_SERVER_HOST')
+INFLUX_SERVER_PORT = os.getenv('INFLUX_SERVER_PORT')
+INFLUX_ORG = os.getenv('INFLUX_ORG')
+INFLUX_BUCKET_NAME = os.getenv('INFLUX_BUCKET_NAME')
+
+# Feed Tokens
+LUNARCRUSH_TOKEN = os.getenv('LUNARCRUSH_TOKEN')
+LUNARCRUSH_ASSET_SYMBOLS = ['btc', 'eth', 'bnb', 'matic']
