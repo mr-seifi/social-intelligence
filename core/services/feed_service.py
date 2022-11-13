@@ -78,7 +78,7 @@ class LunarCrushService:
     def _clean_dataframe(df: pd.DataFrame):
         df.time = pd.to_datetime(df.time, unit='s')
         df.index = df.time
-        df.drop(['asset_id', 'time'], axis=1, inplace=True)
+        df.drop(['asset_id', 'time', 'price_score'], axis=1, inplace=True)
 
     def fetch_data(self, asset_symbol, interval='1w') -> pd.DataFrame:
         data = self._json_load(
