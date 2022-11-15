@@ -16,7 +16,7 @@ class InfluxDBService:
         self._bucket = settings.INFLUX_BUCKET_NAME
         self._tries = 3
         self._tries_per_name = defaultdict(lambda: 0)
-        self._successfully_sent = []
+        self._successfully_sent = set()
 
     @property
     def client(self):
@@ -27,7 +27,7 @@ class InfluxDBService:
         return self.client.write_api(write_options=SYNCHRONOUS)
 
     def report(self, measurement):
-        self._successfully_sent.append(measurement)
+        self._successfully_sent.add(measurement)
 
     def write(self, record: pd.DataFrame, measurement_name):
         try:
@@ -52,4 +52,5 @@ class InfluxDBService:
             print('exception occurred', ex)
 
     def __repr__(self):
-        return f'{len(self._successfully_sent)} coins sent. {self._successfully_sent}'
+        return f'{len(remained := self._successfully_sent - set(settings.LUNARCRUSH_ASSET_SYMBOLS))} coins did not ' \
+               f'send! {remained}'
