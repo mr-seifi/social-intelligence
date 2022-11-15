@@ -15,7 +15,7 @@ class InfluxDBService:
         self._org = settings.INFLUX_ORG
         self._bucket = settings.INFLUX_BUCKET_NAME
         self._tries = 3
-        self._tries_per_name = defaultdict(lambda x: 0)
+        self._tries_per_name = defaultdict(lambda: 0)
         self._successfully_sent = []
 
     @property
