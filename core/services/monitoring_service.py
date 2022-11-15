@@ -44,10 +44,9 @@ class InfluxDBService:
                 type_2 = 'int'
 
             record = record.astype({field: type_2})
-            if self._tries_per_name[measurement_name] < self._tries:
-                self._tries_per_name[measurement_name] += 1
-            else:
-                record.drop([field], axis=1, inplace=True)
+            self._tries_per_name[measurement_name] += 1
+            if self._tries_per_name[measurement_name] > self._tries:
+                return
             self.write(record, measurement_name)
         except Exception as ex:
             print('exception occurred', ex)
