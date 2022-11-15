@@ -19,6 +19,9 @@ class Command(BaseCommand):
 
         for sym in symbols:
             df = lunar_service.fetch_data(asset_symbol=sym, interval='1w')
-            inf_service.write(record=df, measurement_name=sym)
+            try:
+                inf_service.write(record=df, measurement_name=sym)
+            except Exception as e:
+                continue
 
         self.stdout.write(f"All data is successfully fetched! {inf_service}", ending='')
