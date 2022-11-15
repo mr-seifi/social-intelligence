@@ -21,4 +21,4 @@ class Command(BaseCommand):
             df = lunar_service.fetch_data(asset_symbol=sym, interval='1w')
             inf_service.write(record=df, measurement_name=sym)
 
-        self.stdout.write("All data is successfully fetched!", ending='')
+        self.stdout.write(f"All data is successfully fetched! {inf_service}", ending='')
