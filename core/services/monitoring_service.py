@@ -4,6 +4,7 @@ from django.conf import settings
 from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 from influxdb_client.rest import ApiException
+from collections import defaultdict
 
 
 class InfluxDBService:
@@ -13,6 +14,8 @@ class InfluxDBService:
         self._token = settings.INFLUX_TOKEN
         self._org = settings.INFLUX_ORG
         self._bucket = settings.INFLUX_BUCKET_NAME
+        self._tries = 3
+        self._tries_per_name = defaultdict(lambda x: 0)
 
     @property
     def client(self):
@@ -35,4 +38,8 @@ class InfluxDBService:
                 type_2 = 'int'
 
             record = record.astype({field: type_2})
+            if self._tries_per_name[measurement_name] < self._tries:
+                self._tries_per_name[measurement_name] += 1
+            else:
+                record.drop([field], axis=1, inplace=True)
             self.write(record, measurement_name)
