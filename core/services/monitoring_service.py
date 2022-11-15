@@ -16,6 +16,7 @@ class InfluxDBService:
         self._bucket = settings.INFLUX_BUCKET_NAME
         self._tries = 3
         self._tries_per_name = defaultdict(lambda x: 0)
+        self._successfully_sent = []
 
     @property
     def client(self):
@@ -25,11 +26,16 @@ class InfluxDBService:
     def write_client(self) -> InfluxDBClient.write_api:
         return self.client.write_api(write_options=SYNCHRONOUS)
 
+    def report(self, measurement):
+        self._successfully_sent.append(measurement)
+
     def write(self, record: pd.DataFrame, measurement_name):
         try:
             self.write_client.write(bucket=self._bucket,
                                     record=record,
                                     data_frame_measurement_name=measurement_name)
+            self.report(measurement_name)
+
         except ApiException as ae:
             field, measurement, type_1, type_2 = re.findall(r'input\sfield\s\\?\"(.+?)\\?\"\son\smeasurement\s\\?'
                                                             r'\"(.+?)\\?\"\sis\stype\s(.+),\salready\sexists\sas'
@@ -43,3 +49,8 @@ class InfluxDBService:
             else:
                 record.drop([field], axis=1, inplace=True)
             self.write(record, measurement_name)
+        except Exception as ex:
+            print('exception occurred', ex)
+
+    def __repr__(self):
+        return f'{len(self._successfully_sent)} coins sent. {self._successfully_sent}'
