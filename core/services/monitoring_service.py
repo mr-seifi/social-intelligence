@@ -52,5 +52,5 @@ class InfluxDBService:
             print('exception occurred', ex)
 
     def __repr__(self):
-        return f'{len(remained := self._successfully_sent - set(settings.LUNARCRUSH_ASSET_SYMBOLS))} coins did not ' \
+        return f'{len(remained := set(settings.LUNARCRUSH_ASSET_SYMBOLS) - self._successfully_sent)} coins did not ' \
                f'send! {remained}'
