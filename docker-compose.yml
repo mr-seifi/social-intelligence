@@ -14,16 +14,6 @@ services:
     depends_on:
       - db
 
-#  web-test:
-#    image: social_intelligence_web
-#    command: python manage.py test
-#    volumes:
-#      - data:/app/data/
-#    env_file:
-#      - ./.env
-#    depends_on:
-#      - db
-
   db:
     image: postgres:13.0-alpine
     volumes:
