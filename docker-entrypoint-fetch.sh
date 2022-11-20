@@ -1,3 +1,5 @@
+python manage.py fetch 0
+
 sleep 3600
 
-python manage.py fetch 0
+sh ./docker-entrypoint-fetch.sh
