@@ -37,8 +37,9 @@ services:
       - "8087:8086"
     volumes:
       - influxdb:/var/lib/influxdb
-
+      - influxdb2:/var/lib/influxdb2
 volumes:
   data:
   postgres_data:
   influxdb:
+  influxdb2:
