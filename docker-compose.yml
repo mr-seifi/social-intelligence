@@ -38,6 +38,8 @@ services:
     volumes:
       - influxdb:/var/lib/influxdb
       - influxdb2:/var/lib/influxdb2
+    env_file:
+      - ./.env
 volumes:
   data:
   postgres_data:
