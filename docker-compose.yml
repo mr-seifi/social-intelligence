@@ -35,7 +35,10 @@ services:
     image: influxdb:2.5.1
     ports:
       - "8087:8086"
+    volumes:
+      - influxdb:/var/lib/influxdb
 
 volumes:
   data:
   postgres_data:
+  influxdb:
