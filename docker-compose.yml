@@ -18,7 +18,7 @@ services:
     build: .
     command: sh ./docker-entrypoint-fetch.sh
     env_file:
-      - ./env
+      - ./.env
     depends_on:
       - db
 
