@@ -53,7 +53,7 @@ services:
       - ./.env
     restart: on-failure
     depends_on:
-      - influxdb
+      - influx
 
 volumes:
   data:
