@@ -21,6 +21,8 @@ services:
       - ./.env
     depends_on:
       - db
+    volumes:
+      - ./:/app/
 
   db:
     image: postgres:13.0-alpine
