@@ -43,7 +43,7 @@ services:
 
   influxdb_cli:
     links:
-      - influxdb
+      - influx
     image: influxdb:latest
     volumes:
       - influxdb2:/var/lib/influxdb2:rw
