@@ -14,6 +14,14 @@ services:
     depends_on:
       - db
 
+  fetch:
+    build: .
+    command: sh ./docker-entrypoint-fetch.sh
+    env_file:
+      - ./env
+    depends_on:
+      - db
+
   db:
     image: postgres:13.0-alpine
     volumes:

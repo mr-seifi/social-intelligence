@@ -1,8 +1,9 @@
-import re
-
 from django.conf import settings
 from django.core.management.base import BaseCommand
 from core.services import LunarCrushService, InfluxDBService
+import logging
+
+logging.basicConfig(filename='app.log', filemode='w', format='%(name)s - %(asctime)s - %(levelname)s - %(message)s')
 
 
 class Command(BaseCommand):
@@ -24,4 +25,5 @@ class Command(BaseCommand):
             except Exception as e:
                 continue
 
+        logging.info(f'{inf_service}')
         self.stdout.write(f"All data is successfully fetched! {inf_service}", ending='')
