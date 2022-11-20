@@ -21,6 +21,8 @@ services:
       - ./.env
     depends_on:
       - db
+    ports:
+      - "8086:8086"
     volumes:
       - ./:/app/
 
