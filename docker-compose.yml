@@ -41,20 +41,6 @@ services:
     env_file:
       - ./.env
 
-  influxdb_cli:
-    links:
-      - influx
-    image: influxdb:latest
-    volumes:
-      - influxdb2:/var/lib/influxdb2:rw
-      - ./ssl/influxdb-selfsigned.crt:/etc/ssl/influxdb-selfsigned.crt:rw
-      - ./ssl/influxdb-selfsigned.key:/etc/ssl/influxdb-selfsigned.key:rw
-    env_file:
-      - ./.env
-    restart: on-failure
-    depends_on:
-      - influx
-
 volumes:
   data:
   postgres_data:
