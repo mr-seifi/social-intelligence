@@ -41,8 +41,20 @@ services:
     env_file:
       - ./.env
 
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - /etc/prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
 volumes:
   data:
   postgres_data:
   influxdb:
   influxdb2:
+  prometheus-data:
