@@ -65,7 +65,6 @@ services:
     command: python manage.py prometheus
     ports:
       - "8006:8000"
-    restart: unless-stopped
 
 volumes:
   data:
