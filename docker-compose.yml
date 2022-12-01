@@ -17,6 +17,8 @@ services:
   fetch:
     build: .
     command: sh ./docker-entrypoint-fetch.sh
+    ports:
+      - "8006:8000"
     env_file:
       - ./.env
     depends_on:
