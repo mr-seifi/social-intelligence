@@ -5,6 +5,6 @@ from .models import Token
 
 
 @receiver(post_save, sender=Token)
-@token_social.track_inprogress()
 def send_metrics_post(sender, instance, *args, **kwargs):
-    token_social.labels(instance.name).set(instance.social_volumes)
+    with token_social.labels(instance.name).track_inprogress():
+        token_social.labels(instance.name).set(instance.social_volumes)
