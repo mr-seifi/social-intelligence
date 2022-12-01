@@ -1,11 +1,14 @@
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from .prometheus_models import token_social
 from .models import Token
 
 
 @receiver(pre_save, sender=Token)
-def send_metrics(sender, instance, update_fields, *args, **kwargs):
-    d = update_fields['social_volumes'] - instance.social_volumes
-    token_social.inc(d)
-    print(f'{d} sent!')
+def send_metrics_pre(sender, instance, *args, **kwargs):
+    token_social.dec(instance.social_volumes)
+
+
+@receiver(post_save, sender=Token)
+def send_metrics_post(sender, instance, *args, **kwargs):
+    token_social.inc(instance.social_volumes)
