@@ -1,5 +1,3 @@
-python manage.py fetch 0
+python manage.py fetch 0 prometheus
 
 sleep 3600
-
-sh ./docker-entrypoint-fetch.sh

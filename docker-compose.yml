@@ -23,6 +23,7 @@ services:
       - db
     volumes:
       - ./:/app/
+    restart: unless-stopped
 
   db:
     image: postgres:13.0-alpine
@@ -60,11 +61,11 @@ services:
       - grafana-data:/var/lib/grafana
     restart: unless-stopped
 
-  data-exporter:
-    build: .
-    command: python manage.py prometheus
-    ports:
-      - "8006:8000"
+#  data-exporter:
+#    build: .
+#    command: python manage.py prometheus
+#    ports:
+#      - "8006:8000"
 
 volumes:
   data:

@@ -5,6 +5,8 @@ from influxdb_client import InfluxDBClient
 from influxdb_client.client.write_api import SYNCHRONOUS
 from influxdb_client.rest import ApiException
 from collections import defaultdict
+from core import prometheus_models
+from prometheus_client import start_http_server
 
 
 class InfluxDBService:
@@ -54,3 +56,18 @@ class InfluxDBService:
     def __repr__(self):
         return f'{len(remained := set(settings.LUNARCRUSH_ASSET_SYMBOLS) - self._successfully_sent)} coins did not ' \
                f'send! {remained}'
+
+
+class PrometheusService:
+
+    def __init__(self, token_name: str):
+        self._token_name = token_name
+
+    def send(self, df: pd.DataFrame):
+        [getattr(prometheus_models, f'token_{col}').labels(self._token_name).set(df[col][-1])
+         for col in df.columns
+         if getattr(prometheus_models, f'token_{col}', None)]
+
+    @staticmethod
+    def runserver():
+        start_http_server(8000)
