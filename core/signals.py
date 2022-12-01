@@ -1,6 +1,6 @@
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
-from prometheus_models import token_social
+from .prometheus_models import token_social
 from .models import Token
 
 
