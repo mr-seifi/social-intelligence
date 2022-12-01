@@ -60,6 +60,13 @@ services:
       - grafana-data:/var/lib/grafana
     restart: unless-stopped
 
+  data-exporter:
+    build: .
+    command: python manage.py prometheus
+    ports:
+      - "8006:8000"
+    restart: unless-stopped
+
 volumes:
   data:
   postgres_data:
