@@ -64,7 +64,7 @@ class PrometheusService:
         self._token_name = token_name
 
     def send(self, df: pd.DataFrame):
-        [getattr(prometheus_models, f'token_{col}').labels(self._token_name).set(df[col][-1])
+        [getattr(prometheus_models, f'token_{col}').labels(self._token_name).set(df[col][-1] or 0)
          for col in df.columns
          if getattr(prometheus_models, f'token_{col}', None)]
 
